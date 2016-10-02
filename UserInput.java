@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
-
-public class UserInput {
+public class UserInput extends PageType {
 	//init.
+	ChosenPageType cpt = new ChosenPageType();
 
-	int getInt() throws NumberFormatException {
+	int getInt() {
 		Scanner sc = new Scanner(System.in);
 		try {
 			int integer = Integer.parseInt(sc.nextLine());
@@ -21,44 +21,14 @@ public class UserInput {
 		return sc.nextLine();
 	}
 
-	
+	int getType() {
+		int type = getInt();
 
-	int getObject() {
-		ChosenPageType cpt = new ChosenPageType();
-		int object = getInt();
-		while(!(object>0 && object<cpt.getSize())) {
-			System.out.println("The specified object is not on the list. Try again");
-			getObject();
+		if (type>0 && type<types.size()) {
+			System.out.println("You have chosen: " + types.get(type));
+			return type;
 		}
-		return object;
-	}
-
-	int getPlacement(int object) {
-		ChosenPageType cpt = new ChosenPageType();
-		System.out.println("Where do you want to put your " + cpt.getObject(object));
-		System.out.println("    1 HEADER");
-		System.out.println("    2 MAIN");
-
-		int placement = getInt();
-		if (placement == 1) {
-			return placement;
-		}
-		else if (placement == 2) {
-			System.out.println("MAIN is not initialized yet, choose another placement");
-			return 0;
-		}
-		else {
-			System.out.println("The specified placement is not on the list");
-			return 0;
-		}
-	}
-
-	boolean is(String define_string) {
-		if(getString().equalsIgnoreCase(define_string)){
-			return true;
-		}
-		else {
-			return false;
-		}
+		System.out.println("The specified design is not on the list");
+		return 0;
 	}
 }
