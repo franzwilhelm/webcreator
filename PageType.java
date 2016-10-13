@@ -3,18 +3,18 @@ import java.util.List;
 
 
 public class PageType {
-	List<String> types = new ArrayList<String>();
+    List<String> types = new ArrayList<String>();
 
-	//constructor
-	PageType() {
-		types.add("Enter the desired number to get more options\nThe available web page interfaces are:");
-		types.add("Article");
-		types.add("Picture page");
-	}
-	
-	List<String> getTypes() {
-		return types;
-	}
+    //constructor
+    PageType() {
+        types.add("Enter the desired number to get more options\nThe available web page interfaces are:");
+        types.add("Article");
+        types.add("Picture page");
+    }
+
+    List<String> getTypes() {
+        return types;
+    }
 }
 
 /*
