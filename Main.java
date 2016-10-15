@@ -18,34 +18,33 @@
  */
 
 public class Main {
-	public static void main(String[]args) throws Exception {
-		//initializing classes
-		PageType pt = new PageType();
-		UserInput input = new UserInput();
-		Print print = new Print();
-		ChosenPageType cpt = new ChosenPageType();
-		Header hd = new Header();
-		
-		print.list(pt.getTypes());
-		cpt.setType();
-		print.list(cpt.getObjects());
-		cpt.setObject();
-		cpt.setObjectPlacement();
-		hd.readHeader();
-		
-		boolean loop = true;
-		
-		while (loop == true) {
-			System.out.println("Do you wish to add additional objects? [y/n]");
-			String check = input.getString();
-			if(check.equalsIgnoreCase("y")) {
-				hd.readHeader();
-			}
-			else if(check.equalsIgnoreCase("n")) {
-				System.out.println("[program terminated]");
-				loop = false;
-				return;
-			}
-		}
-	}
+    public static void main(String[] args) throws Exception {
+        //initializing classes
+        PageType pt = new PageType();
+        UserInput input = new UserInput();
+        Print print = new Print();
+        ChosenPageType cpt = new ChosenPageType();
+        Header hd = new Header();
+        Createhtml html = new Createhtml();
+
+        print.list(pt.getTypes());
+        cpt.setType();
+        print.list(cpt.getObjects());
+        cpt.setObject();
+        cpt.setObjectPlacement();
+        hd.readHeader();
+
+        while (true) {
+            System.out.println("Do you wish to add additional objects? [y/n]");
+            String check = input.getString();
+            if (check.equalsIgnoreCase("y")) {
+                hd.readHeader();
+            } else if (check.equalsIgnoreCase("n")) {
+                System.out.println("[program terminated]");
+                html.convert();
+                html.create();
+                System.exit(0);
+            }
+        }
+    }
 }
