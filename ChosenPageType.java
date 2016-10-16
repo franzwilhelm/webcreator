@@ -3,28 +3,16 @@ import java.util.List;
 
 
 public class ChosenPageType {
-    private static List<String> chosenType = new ArrayList<String>();
+    static List<String> chosenType = new ArrayList<>();
     private static int object;
     private static int objectPlacement;
-    PageType pt = new PageType();
 
-    void setType() {
-        Article article = new Article();
-        PicturePage picPage = new PicturePage();
-        UserInput input = new UserInput();
-        int type = input.getInt();
+    ChosenPageType() {
 
-        if (type > 0 && type < pt.getTypes().size()) {
-            System.out.println("You have chosen: " + pt.getTypes().get(type));
-            if (type == 1) {
-                chosenType = article.getList();
-            } else if (type == 2) {
-                chosenType = picPage.getList();
-            }
-        } else {
-            System.out.println("The specified design is not on the list, try again");
-            setType();
-        }
+    }
+
+    void addObject(String object) {
+        chosenType.add(object);
     }
 
     void setObject() {
@@ -39,21 +27,8 @@ public class ChosenPageType {
     }
 
     void setObjectPlacement() {
-        UserInput input = new UserInput();
-        System.out.println("Where do you want to put your " + getObjectContent());
-        System.out.println("    1 HEADER");
-        System.out.println("    2 MAIN");
-
-        int placement = input.getInt();
-        if (placement == 1) {
-            objectPlacement = placement;
-        } else if (placement == 2) {
-            System.out.println("MAIN is not initialized yet, choose another placement");
-            setObjectPlacement();
-        } else {
-            System.out.println("The specified placement is not on the list");
-            setObjectPlacement();
-        }
+        System.out.println("Your " + getObjectContent() + " is to be put in the header");
+        objectPlacement = 1;
     }
 
     List<String> getObjects() {
@@ -66,13 +41,5 @@ public class ChosenPageType {
 
     int getSize() {
         return chosenType.size();
-    }
-
-    int getObjectPlacement() {
-        return objectPlacement;
-    }
-
-    int getObject() {
-        return object;
     }
 }

@@ -4,21 +4,26 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Header {
-    private static int headerSize = 6;
-    private static String[] tempArray = new String[headerSize];
-    private static String[] startArray = new String[headerSize];
-    private static String[] headerArray = new String[headerSize];
-    Files file = new Files();
+    private int headerSize = 6;
+    private String[] tempArray = new String[headerSize];
+    private String[] startArray = new String[headerSize];
+    private String[] headerArray = new String[headerSize];
+    private String title;
+    Files2 file = new Files2();
     ChosenPageType cpt = new ChosenPageType();
+
+    Header(String title) {
+        this.title = title;
+    }
 
     void readHeader() throws Exception {
         UserInput input = new UserInput();
-        if (file.fileExist("header.txt")) {
+        if (file.fileExist("./html_config/" + title + "_header.txt")) {
             System.out.println("A header already exists. Options:\nOpen --------- [o]\nCreate new --- [n]");
             String thisInput = input.getString();
 
             if (thisInput.equalsIgnoreCase("o")) {
-                File headerFile = new File("header.txt");
+                File headerFile = new File("./html_config/" + title + "_header.txt");
                 Scanner sc = new Scanner(headerFile);
                 for (int i = 0; sc.hasNextLine(); i++) {
                     String scanned = sc.nextLine();
@@ -41,7 +46,6 @@ public class Header {
                 createHeaderObject();
             }
         } else {
-            System.out.println("No header exists. A new header was created.");
             //init. empty header
             for (int i = 0; i < tempArray.length; i++) {
                 tempArray[i] = "<" + i + ">";
@@ -79,7 +83,7 @@ public class Header {
     }
 
     void extendHeader() throws Exception {
-        File headerFile = new File("header.txt");
+        File headerFile = new File("./html_config/" + title + "_header.txt");
         Scanner scFile = new Scanner(headerFile);
         UserInput input = new UserInput();
 
@@ -107,10 +111,10 @@ public class Header {
 
     void correctStart(int position) throws Exception {
         UserInput input = new UserInput();
-        System.out.println("Please define the size of your " + cpt.getObjectContent());
+        System.out.println("Please define how many objects you want of the type " + cpt.getObjectContent());
         int size = input.getInt();
         while (!(size < 5)) {
-            System.out.println("The maximum object size is 4");
+            System.out.println("The maximum number of objects is 4");
             size = input.getInt();
         }
         int counter = 0;
@@ -126,23 +130,18 @@ public class Header {
     }
 
     void saveHeader() throws Exception {
-        File txtFile = new File("header.txt");
-        File htmlFile = new File("header.html");
-
+        File txtFile = new File("./html_config/" + title + "_header.txt");
+        txtFile.createNewFile();
         Scanner sc = new Scanner(System.in);
         System.out.println("Do you want to save your header [y/n]");
         String input = sc.nextLine();
         if (input.equalsIgnoreCase("y")) {
-            txtFile.createNewFile();
-            htmlFile.createNewFile();
-            PrintWriter txt = new PrintWriter("header.txt");
-            PrintWriter html = new PrintWriter("header.html");
-
+            PrintWriter txt = new PrintWriter(txtFile);
             for (int i = 0; i < headerArray.length; i++) {
                 txt.println(headerArray[i]);
             }
             txt.close();
-            System.out.println("Your header was successfully saved to the file \"header.txt\" ");
+            System.out.println("Your header was successfully saved");
         } else if (input.equalsIgnoreCase("n")) {
             System.out.println("Your new header was not saved.");
         }
