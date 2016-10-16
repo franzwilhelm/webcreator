@@ -17,33 +17,48 @@
  *  Class division for easier workflow in future patches
  */
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
+    private static String title;
+
     public static void main(String[] args) throws Exception {
         //initializing classes
-        PageType pt = new PageType();
         UserInput input = new UserInput();
         Print print = new Print();
         ChosenPageType cpt = new ChosenPageType();
-        Header hd = new Header();
+        Files2 f = new Files2();
+        File dir = new File("./html/");
+        File dir2 = new File("./html_config/");
+        File dir3 = new File("./pictures/");
+        dir.mkdirs();
+        dir2.mkdirs();
+        dir3.mkdirs();
 
-        print.list(pt.getTypes());
-        cpt.setType();
+        title = f.getTitle("./html", ".html");
+        Createhtml html = new Createhtml(title);
+
+        cpt.addObject("Available objects for " + title + " are:");
+        cpt.addObject("<Picture>");
+        cpt.addObject("<Hyperlink>");
+
         print.list(cpt.getObjects());
         cpt.setObject();
         cpt.setObjectPlacement();
+        Header hd = new Header(title);
         hd.readHeader();
 
-        boolean loop = true;
-
-        while (loop == true) {
+        while (true) {
             System.out.println("Do you wish to add additional objects? [y/n]");
             String check = input.getString();
             if (check.equalsIgnoreCase("y")) {
                 hd.readHeader();
             } else if (check.equalsIgnoreCase("n")) {
+                html.create();
                 System.out.println("[program terminated]");
-                loop = false;
-                return;
+                System.exit(0);
             }
         }
     }
