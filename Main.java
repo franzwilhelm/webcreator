@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+<<<<<<< HEAD
     private static String title;
 
     public static void main(String[] args) throws Exception {
@@ -51,11 +52,32 @@ public class Main {
         hd.readHeader();
 
         while (true) {
+=======
+    public static void main(String[] args) throws Exception {
+        //initializing classes
+        PageType pt = new PageType();
+        UserInput input = new UserInput();
+        Print print = new Print();
+        ChosenPageType cpt = new ChosenPageType();
+        Header hd = new Header();
+
+        print.list(pt.getTypes());
+        cpt.setType();
+        print.list(cpt.getObjects());
+        cpt.setObject();
+        cpt.setObjectPlacement();
+        hd.readHeader();
+
+        boolean loop = true;
+
+        while (loop == true) {
+>>>>>>> refs/remotes/origin/wip-leggetiljava
             System.out.println("Do you wish to add additional objects? [y/n]");
             String check = input.getString();
             if (check.equalsIgnoreCase("y")) {
                 hd.readHeader();
             } else if (check.equalsIgnoreCase("n")) {
+<<<<<<< HEAD
                 html.create();
                 System.out.println("[program terminated]");
                 System.exit(0);
@@ -63,3 +85,12 @@ public class Main {
         }
     }
 }
+=======
+                System.out.println("[program terminated]");
+                loop = false;
+                return;
+            }
+        }
+    }
+}
+>>>>>>> refs/remotes/origin/wip-leggetiljava
