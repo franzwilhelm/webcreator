@@ -67,6 +67,8 @@ public class Createhtml {
                                 p.println("<a href=\"https://www.facebook.com/sebastianbrg\" class=\"navbar-header\"><img class=\"img-l\" src=\"../pictures/" + picture + "\" alt=\"Sebastian er g\"></a>");
                                 counter++;
                                 break;
+
+                            //
                             case ("<Hyperlink>"):
                                 System.out.println("What text do you want for hyperlink " + counter2 + "?");
                                 p.println("<a href=\"https://www.facebook.com/sebastianbrg\" class=\"m-l-s navbar-links\">"+ input.getString() + "</a>");
